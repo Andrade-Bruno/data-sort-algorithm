@@ -39,6 +39,7 @@ namespace Run
           string quick = quickSort.handleRunningQuickSort(selectionList, startInterval, finalInterval, show);
           Console.WriteLine(quick);
         }
+      }
     }
   }
 }
