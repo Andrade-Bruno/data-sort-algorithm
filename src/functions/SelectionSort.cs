@@ -1,55 +1,32 @@
 using System;
+using Utils;
+using Constants;
 
-namespace SelectionSortNamespace
+namespace Functions
 {
   class SelectionSort
   {
-    public string handleAlgorithm(int[] unsortedList)
+    Random random = new Random();
+    Error errors = new Error();
+    FillRandomValues fill = new FillRandomValues();
+    Time time = new Time();
+
+    public string handleRunningSelectionSort(int[] unsortedList, int startInterval, int finalInterval, bool show)
     {
-      Random random = new Random();
+      if (unsortedList.Length <= 1) return errors.getSizeError();
 
-      if (unsortedList.Length > 1)
+      fill.handleList(unsortedList, startInterval, finalInterval);
+        
+      string result = time.handleRuntime(handleSelectionSort, unsortedList);
+
+      Console.WriteLine("Selection Sort in " + unsortedList.Length + " numbers:");
+
+      if (show)
       {
-        string stringInitialMoment = DateTime.Now.ToString("hhmmssfff");
-        int initialMoment = Int32.Parse(stringInitialMoment);
-
-        for (int i = 0; i < unsortedList.Length; i++)
-        {
-          unsortedList.SetValue(random.Next(), i);
-        }
-
-        handleSelectionSort(unsortedList);
-
-        string stringFinalMoment = DateTime.Now.ToString("hhmmssfff");
-        int finalMoment = Int32.Parse(stringFinalMoment);
-
-        int milliseconds = finalMoment - initialMoment;
-        string stringMilliseconds = Convert.ToString(milliseconds);
-
-        Console.WriteLine("SelectionSort:");
-
-        if (milliseconds >= 1000)
-        {
-          string resultInSeconds = Convert.ToString(milliseconds / 1000);
-
-          if (Int32.Parse(resultInSeconds) >= 60)
-          {
-            string resultInMinutes = Convert.ToString(Int32.Parse(resultInSeconds) / 60);
-
-            return resultInMinutes + "min" + " ou " + resultInSeconds + "sec";
-          }
-
-          return resultInSeconds + "sec" + " ou " + milliseconds + "ms";
-        }
-        else
-        {
-          return stringMilliseconds + "ms";
-        }
+        Console.WriteLine(string.Join(", ", unsortedList));
       }
-      else
-      {
-        return "O tamanho da lista deve ser maior que 1.";
-      }
+
+      return result;
     }
 
     public void handleSelectionSort(int[] unsortedList)

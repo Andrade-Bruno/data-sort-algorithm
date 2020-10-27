@@ -1,15 +1,15 @@
-﻿namespace c_
+﻿using Run;
+
+namespace c_
 {
   class Program 
   {
     static void Main(string[] args)
     {
-      MainNamespace.Main main = new MainNamespace.Main();
+      Main run = new Main();
 
-      int[] unsortedList = new int[150];
-
-      main.handleBubbleSort(unsortedList);
-      main.handleSelectionSort(unsortedList);
+      // showConsole(size, startInterval, finalInterval, showSorted)
+      run.showConsole(20, 0, 1000, true);
     }
   }
 }
